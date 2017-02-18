@@ -30,4 +30,4 @@ This runs the cat.jpg image through the Inception-V3 network to get the 2048-dim
 I got a lot of the code from the TF Slim tutorial. It's taken from on their [github](https://github.com/tensorflow/models/tree/master/slim)
 
 
-P.S. made a grammatical error that I realised too late to correct - my variables should be 'input' instead of 'inputs'
+P.S. made a grammatical error that I realised too late to correct - my variables should be named 'input' instead of 'inputs'
