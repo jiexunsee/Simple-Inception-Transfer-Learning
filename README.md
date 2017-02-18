@@ -1,11 +1,11 @@
 # A classifier for cats and dogs
-------
+
 This is a response to Siraj's challenge of the week.
 
 This is a classifier made with basic TensorFlow, using Transfer Learning from the Inception-V3 model. Data is taken from [this](https://www.kaggle.com/c/dogs-vs-cats) Kaggle competition, as recommended by Siraj. 
 
 ## How to use
------
+
 ### Training
 First, train the model, run:
 
@@ -26,7 +26,7 @@ This runs the cat.jpg image through the Inception-V3 network to get the 2048-dim
 
 
 ## Notes:
--------
+
 I got a lot of the code from the TF Slim tutorial. It's taken from on their [github](https://github.com/tensorflow/models/tree/master/slim)
 
 
