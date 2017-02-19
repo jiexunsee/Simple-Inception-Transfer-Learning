@@ -1,32 +1,39 @@
 import tensorflow as tf
+import sys
+import math
+import os
+import numpy as np
+
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 from getvector import getvector
-import os
 from tensorflow.python.platform import gfile
-import math
-import numpy as np
 from progress.bar import Bar
-import sys
+
+
 
 if len(sys.argv) <= 1:
 	print ('enter option: "train" or "test <image file name>"')
 	exit()
 
+
 data_inputs = []
 data_labels = []
 
-image_dir = './train'
-file_list = []
-file_glob = os.path.join(image_dir, '*.jpg')
-file_list.extend(gfile.Glob(file_glob))
-file_list = file_list[0:300]
-
+# Checking if the 2048-dimensional vector representations of the training images are already available
 if os.path.isfile('./data_inputs.txt') and os.path.isfile('./data_labels.txt'):
 	data_inputs = np.loadtxt('data_inputs.txt')
 	data_labels = np.loadtxt('data_labels.txt')
 
 else: 
+	# add in your images here if you want to train the model on your own images
+	image_dir = './train'
+	file_list = []
+	file_glob = os.path.join(image_dir, '*.jpg')
+	file_list.extend(gfile.Glob(file_glob))
+
+	# I only used 300 images from the cats and dogs dataset
+	file_list = file_list[0:300]
 	bar = Bar('Inception-V3 is processing images:', max=300)
 	for file_name in file_list:
 		data_inputs.append(getvector(file_name))
@@ -46,7 +53,7 @@ val_inputs, test_inputs, val_labels, test_labels = train_test_split(valtest_inpu
 
 # Setting hyperparameters
 learning_rate = 0.01
-batch_size = 128
+batch_size = 64
 epochs = 10
 log_batch_step = 50
 
@@ -76,7 +83,7 @@ loss = tf.reduce_sum(difference)
 # Setting optimiser
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(loss)
 
-#Define accuracy
+# Define accuracy
 is_correct_prediction = tf.equal(tf.argmax(prediction, 1), tf.argmax(labels, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct_prediction, tf.float32))
 
@@ -85,10 +92,10 @@ saver = tf.train.Saver((weights, bias))
 if sys.argv[1] == 'train':
 # Run tensorflow session
 	with tf.Session() as sess:
-		#ADD TENSORBOARD STUFF
 		init = tf.global_variables_initializer()
 		sess.run(init)
 
+		# Running the training in batches 
 		batch_count = int(math.ceil(len(train_inputs)/batch_size))
 
 		for epoch_i in range(epochs):
@@ -99,11 +106,11 @@ if sys.argv[1] == 'train':
 				batch_start = batch_i*batch_size
 				batch_inputs = train_inputs[batch_start:batch_start + batch_size]
 				batch_labels = train_labels[batch_start:batch_start + batch_size]
-				# Run optimizer and get loss
+				# Run optimizer
 				_ = sess.run(optimizer, feed_dict={inputs: batch_inputs, labels: batch_labels})
 			
 
-			# Check accuracy against Validation data
+			# Check accuracy against validation data
 			val_accuracy, val_loss = sess.run([accuracy, loss], feed_dict={inputs: val_inputs, labels: val_labels})
 			print("After epoch {}, Loss: {}, Accuracy: {}".format(epoch_i+1, val_loss, val_accuracy))
 
@@ -129,7 +136,7 @@ elif sys.argv[1] == 'test':
 		
 		prediction = sess.run(prediction, feed_dict={inputs: image_input})
 
-		print ('Chance of it being a cat: {}, Chance of it being a dog: {}'.format(prediction[0][0], prediction[0][1]))
+		print ('It\'s a cat: {}, It\'s a dog: {}'.format(prediction[0][0], prediction[0][1]))
 
 else:
 	print ('type either train or test!')
