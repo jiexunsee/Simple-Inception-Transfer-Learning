@@ -12,7 +12,7 @@ JPG images --> Inception-V3 --> 2048-dimensional vector --> Fully connected laye
 ### Training
 First, train the model, run:
 
-`python trainclassifier.py train`
+`python classifier.py train`
 
 This script will call the getvector.py script, which uses the Inception-V3 model to produce 2048-dimensional vector representations of images. These 2048-dimensional vectors have already been saved in the data_inputs.txt and data_labels.txt files, for convenience. (It takes quite long on a CPU to run a few hundred images through the Inception network, let alone the full 25,000 image dataset.)
 
@@ -23,7 +23,7 @@ For my training, I only used 300 images of cats and dogs combined. Hence the tex
 ### Testing
 To test the model, run:
 
-`python trainclassifier.py test cat.jpg`
+`python classifier.py test cat.jpg`
 
 This runs the cat.jpg image through the Inception-V3 network to get the 2048-dimensional vector. Then it loads the saved TensorFlow one-layer neural network, and feeds the cat.jpg image vector into it. Do try other pictures too, the predictions are quite accurate.
 
