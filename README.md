@@ -16,7 +16,7 @@ First, train the model, run:
 
 This script will call the getvector.py script, which uses the Inception-V3 model to produce 2048-dimensional vector representations of images. These 2048-dimensional vectors have already been saved in the data_inputs.txt and data_labels.txt files, for convenience. (It takes quite long on a CPU to run a few hundred images through the Inception network, let alone the full 25,000 image dataset.)
 
-After getting these vector representations, I use a fully connected one layer neural network to output a prediction vector, using TensorFlow.
+After getting these vector representations, I use a fully connected one layer neural network to output a prediction vector, built with TensorFlow.
 
 For my training, I only used 300 images of cats and dogs combined. Hence the text files only contain 300 training example data. However, the network performs remarkably well for such few training examples. This is perhaps because the Inception model was trained on a lot of pictures of animals like cats and dogs so it's able to extract the relevant features.
 
