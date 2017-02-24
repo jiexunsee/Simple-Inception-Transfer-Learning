@@ -1,6 +1,6 @@
 # A classifier for cats and dogs
 
-*** EDIT: use [this](https://github.com/jiexunsee/New-Simple-Inception-Transfer-Learning) repository for a simpler and faster implementation transfer learning with inception ***
+###*** EDIT: use [THIS](https://github.com/jiexunsee/New-Simple-Inception-Transfer-Learning) repository for a simpler and faster implementation transfer learning with inception
 
 This is a response to Siraj's challenge of the week.
 
