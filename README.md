@@ -1,5 +1,7 @@
 # A classifier for cats and dogs
 
+*** EDIT: use [this](https://github.com/jiexunsee/New-Simple-Inception-Transfer-Learning) repository for a simpler and faster implementation transfer learning with inception ***
+
 This is a response to Siraj's challenge of the week.
 
 This is a classifier made with basic TensorFlow, using Transfer Learning from the Inception-V3 model. Data is taken from [this](https://www.kaggle.com/c/dogs-vs-cats) Kaggle competition, as recommended by Siraj. 
