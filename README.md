@@ -33,6 +33,3 @@ This runs the cat.jpg image through the Inception-V3 network to get the 2048-dim
 ## Notes:
 
 I got a lot of the code from the TF Slim tutorial. It's taken from the [github](https://github.com/tensorflow/models/tree/master/slim). Specifically, I modified Inception-V3.py from [here](https://github.com/tensorflow/models/blob/master/slim/nets/inception_v3.py) to return the 2048-D vector when the inception_v3 function is called, instead of the 1001 logits vector. The 1001 logits vector directly correspond to the 1001 categories that Inception is trained to classify.
-
-
-P.S. made a grammatical error that I realised too late to correct - my variables should be named 'input' instead of 'inputs'
